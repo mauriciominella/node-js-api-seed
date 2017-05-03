@@ -1,0 +1,73 @@
+mongo:
+  image: mongo:3.4.1
+  volumes:
+    - ./data:/appdata
+  ports:
+    - 27017:27017
+
+redis:
+  image: redis:3.0
+  ports:
+    - 6379:6379
+
+data-loader:
+  image: node:7.4.0-onbuild
+  command: npm run load-data
+  volumes:
+    - .:/usr/src/app
+  links:
+    - mongo:mongo
+
+worker:
+  image: node:7.4.0-onbuild
+  command: npm run worker
+  volumes:
+    - .:/usr/src/app
+  links:
+    - mongo:mongo
+    - redis:redis
+
+local:
+  image: node:7.4.0-onbuild
+  command: npm run dev
+  volumes:
+    - .:/usr/src/app
+  ports:
+    - 8080:8080
+  environment:
+    HTTP_PORT: 8080
+    HTTP_HOST: '0.0.0.0'
+  links:
+    - mongo:mongo
+    - redis:redis
+    - worker:worker
+
+prod:
+  build: .
+  command: npm start
+  ports:
+    - 8080:8080
+  environment:
+    HTTP_PORT: 8080
+    HTTP_HOST: '0.0.0.0'
+  links:
+    - mongo:mongo
+    - redis:redis
+    - worker:worker
+
+test:
+  image: node:7.4.0-onbuild
+  volumes:
+    - .:/usr/src/app
+  command: npm run test-integration
+  ports:
+    - 9000:9000
+  environment:
+    NODE_ENV: 'TEST'
+    LOG_LEVEL: 'none'
+    HTTP_PORT: 9000
+    HTTP_HOST: '0.0.0.0'
+  links:
+    - mongo:mongo
+    - redis:redis
+    - worker:worker

@@ -1,0 +1,38 @@
+{
+  "extends": "airbnb-base",
+  "globals": {
+    "describe": true,
+    "it": true,
+    "expect": true,
+    "assert": true,
+    "app": true,
+    "request": true,
+    "beforeEach": true,
+    "before": true,
+    "td": true,
+    "mongo": true,
+    "queue": true,
+    "data": true,
+    "Joi": true,
+    "joiAssert": true,
+    "nock": true,
+    "container": true,
+    "clearMongo": true,
+    "restoreFiles": true,
+    "fakeLogger": true,
+  },
+  "parser": "babel-eslint",
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "max-len": 0,
+    "no-use-before-define": 0,
+    "space-before-function-paren": [2, {"anonymous": "always", "named": "always"}],
+    "func-names": 0,
+    "id-length": [1, {"exceptions": ["i", "j", "e", "a", "b"]}],
+    "arrow-body-style": 0,
+    "no-console": 0,
+  }
+}
