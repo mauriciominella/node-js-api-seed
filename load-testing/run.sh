@@ -14,4 +14,4 @@ docker-compose up data-loader
 artillery run hello.yml
 
 # stopping and removing application containers
-docker rm -f $(docker ps --filter 'name=textkernelmauricioassignment*' -qa)
+docker rm -f $(docker ps --filter 'name=nodejsapiseed*' -qa)

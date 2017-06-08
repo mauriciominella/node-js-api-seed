@@ -16,14 +16,14 @@
     "cover": "node_modules/.bin/babel-node node_modules/.bin/babel-istanbul cover node_modules/.bin/_mocha -- --recursive ./spec/unit/",
     "test:unit": "mocha --compilers js:babel-register --timeout 30000 --report spec --recursive --watch-extensions .spec.js ./spec/unit",
     "test:unit:watch": "npm run test:unit -- --watch",
-    "test:integration": "docker-compose run --rm test; docker rm -f $(docker ps --filter 'name=node-js-api-seed*' -qa)",
+    "test:integration": "docker-compose run --rm test; docker rm -f $(docker ps --filter 'name=nodejsapiseed*' -qa)",
     "build": "babel src/ --out-dir lib",
     "dev": "babel-node bin/service.js",
     "worker": "babel-node bin/worker.js",
     "load-data": "babel-node bin/dataloader.js",
     "dev:watch": "supervisor --watch src -- -r 'babel-register' ./bin/service.js",
     "up": "docker-compose up local",
-    "down": "docker rm -f $(docker ps --filter 'name=node-js-api-seed*' -qa)"
+    "down": "docker rm -f $(docker ps --filter 'name=nodejsapiseed*' -qa)"
   },
   "repository": {
     "type": "git",
